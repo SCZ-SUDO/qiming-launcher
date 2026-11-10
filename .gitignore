@@ -1,0 +1,11 @@
+node_modules/
+dist/
+*.log
+selftest-trace.txt
+selftest-report.txt
+e2e-report.txt
+e2e-launch.log
+debug-*.txt
+trace-*.txt
+t1.txt
+.DS_Store

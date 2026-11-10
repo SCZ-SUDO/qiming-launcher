@@ -1,0 +1,348 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8" />
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data:; script-src 'self';" />
+<title>启明</title>
+<link rel="stylesheet" href="style.css" />
+</head>
+<body>
+<div class="app">
+  <!-- 左侧导航 -->
+  <aside class="rail">
+    <div class="rail-logo" title="启明">
+      <svg viewBox="0 0 32 32" width="26" height="26" aria-hidden="true">
+        <defs>
+          <linearGradient id="lg" x1="0" y1="0" x2="1" y2="1">
+            <stop offset="0" stop-color="#7ef0cf"/>
+            <stop offset="1" stop-color="#39b9ff"/>
+          </linearGradient>
+        </defs>
+        <path d="M16 2.5c.9 6.4 2.8 8.6 9.2 9.6-6.4 1-8.3 3.2-9.2 9.6-.9-6.4-2.8-8.6-9.2-9.6 6.4-1 8.3-3.2 9.2-9.6z" fill="url(#lg)"/>
+        <path d="M16 21.5c.5 4 1.7 5.3 5.6 6-3.9.6-5.1 2-5.6 6-.5-4-1.7-5.4-5.6-6 3.9-.7 5.1-2 5.6-6z" fill="url(#lg)" opacity=".55"/>
+      </svg>
+    </div>
+    <nav class="rail-nav" id="railNav">
+      <button class="rail-btn active" data-page="home" title="首页">
+        <svg viewBox="0 0 24 24"><path d="M4 11.5 12 4l8 7.5V20a1 1 0 0 1-1 1h-4.5v-6h-5v6H5a1 1 0 0 1-1-1z"/></svg>
+        <span>首页</span>
+      </button>
+      <button class="rail-btn" data-page="download" title="下载">
+        <svg viewBox="0 0 24 24"><path d="M12 3v11m0 0 4.2-4.2M12 14 7.8 9.8M4 17.5V19a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-1.5"/></svg>
+        <span>下载</span>
+      </button>
+      <button class="rail-btn" data-page="mods" title="模组">
+        <svg viewBox="0 0 24 24"><path d="M10 3h4v4a2 2 0 0 0 4 0h3v4a2 2 0 0 1 0 4v4h-4a2 2 0 0 1-4 0H9v-4a2 2 0 0 1 0-4V3z" transform="translate(0,1)"/></svg>
+        <span>模组</span>
+      </button>
+      <button class="rail-btn" data-page="versions" title="版本">
+        <svg viewBox="0 0 24 24"><path d="M4 7.5 12 3l8 4.5v9L12 21l-8-4.5z"/><path d="M4 7.5 12 12l8-4.5M12 12v9"/></svg>
+        <span>版本</span>
+      </button>
+      <button class="rail-btn" data-page="settings" title="设置">
+        <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="3.2"/><path d="M19.4 13.5a7.6 7.6 0 0 0 0-3l1.7-1.3-1.9-3.3-2 .8a7.6 7.6 0 0 0-2.6-1.5L14.3 3h-4.6l-.3 2.2A7.6 7.6 0 0 0 6.8 6.7l-2-.8L2.9 9.2l1.7 1.3a7.6 7.6 0 0 0 0 3l-1.7 1.3 1.9 3.3 2-.8a7.6 7.6 0 0 0 2.6 1.5l.3 2.2h4.6l.3-2.2a7.6 7.6 0 0 0 2.6-1.5l2 .8 1.9-3.3z"/></svg>
+        <span>设置</span>
+      </button>
+      <button class="rail-btn" data-page="about" title="关于">
+        <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 11v6M12 7.6v.2"/></svg>
+        <span>关于</span>
+      </button>
+    </nav>
+    <div class="rail-foot">
+      <div class="rail-dot" id="statusDot" title="就绪"></div>
+    </div>
+  </aside>
+
+  <!-- 主区域 -->
+  <div class="main">
+    <header class="topbar">
+      <div class="topbar-left">
+        <div class="crumb"><span class="crumb-app">启明</span><i>/</i><span id="pageTitle">首页</span></div>
+      </div>
+      <div class="topbar-right">
+        <div class="pill" id="javaPill" title="当前检测到的 Java">Java —</div>
+        <div class="pill ghost" id="memPill">— MB</div>
+        <div class="win-controls" id="winControls" hidden>
+          <button data-w="minimize" title="最小化"><svg viewBox="0 0 12 12"><path d="M2 6h8"/></svg></button>
+          <button data-w="maximize" title="最大化"><svg viewBox="0 0 12 12"><rect x="2.5" y="2.5" width="7" height="7" rx="1"/></svg></button>
+          <button data-w="close" class="danger" title="关闭"><svg viewBox="0 0 12 12"><path d="M3 3l6 6M9 3l-6 6"/></svg></button>
+        </div>
+      </div>
+    </header>
+
+    <div class="content" id="content">
+      <!-- 首页 -->
+      <section class="page" id="page-home">
+        <div class="home-grid">
+          <div class="card hero">
+            <div class="hero-glow"></div>
+            <div class="hero-top">
+              <div>
+                <div class="eyebrow">QIMING LAUNCHER</div>
+                <h1 class="hero-title">启明</h1>
+                <p class="hero-sub">黎明之前，先把游戏点亮。</p>
+              </div>
+              <div class="hero-star">
+                <svg viewBox="0 0 32 32" width="72" height="72">
+                  <path d="M16 2c.9 6.6 3 8.8 9.6 9.9-6.6 1-8.7 3.3-9.6 9.9-.9-6.6-3-8.9-9.6-9.9C13 10.8 15.1 8.6 16 2z" fill="url(#lg)"/>
+                </svg>
+              </div>
+            </div>
+
+            <div class="hero-form">
+              <label class="field">
+                <span>玩家名</span>
+                <input id="username" type="text" maxlength="16" placeholder="Steve" spellcheck="false" />
+              </label>
+              <label class="field">
+                <span>游戏版本</span>
+                <div class="select-wrap">
+                  <select id="versionSelect"></select>
+                </div>
+              </label>
+            </div>
+
+            <div class="hero-quick">
+              <button class="quick" data-folder="mods"><b>mods</b><small>模组目录</small></button>
+              <button class="quick" data-folder="saves"><b>saves</b><small>存档目录</small></button>
+              <button class="quick" data-folder="logs"><b>logs</b><small>运行日志</small></button>
+              <button class="quick" data-folder="assets"><b>assets</b><small>资源文件</small></button>
+            </div>
+
+            <div class="hero-recent">
+              <div class="mini-title">快速选择</div>
+              <div class="quick-vers" id="quickVers"></div>
+            </div>
+
+            <div class="hero-actions">
+              <button class="btn-launch" id="btnLaunch">
+                <span class="btn-launch-label">启动游戏</span>
+                <span class="btn-launch-hint" id="launchHint">选择一个版本</span>
+              </button>
+              <button class="btn-ghost" id="btnOpenGame">游戏目录</button>
+            </div>
+
+            <div class="hero-foot">
+              <span id="heroStatus">就绪</span>
+            </div>
+          </div>
+
+          <div class="side-col">
+            <div class="card mini">
+              <div class="mini-title">运行环境</div>
+              <div class="kv"><span>Java</span><b id="infoJava">—</b></div>
+              <div class="kv"><span>内存</span><b id="infoMem">—</b></div>
+              <div class="kv"><span>系统</span><b id="infoOs">—</b></div>
+              <div class="kv"><span>已安装</span><b id="infoCount">0</b></div>
+            </div>
+            <div class="card mini">
+              <div class="mini-title">最近活动</div>
+              <ul class="feed" id="feed">
+                <li class="muted">暂无记录</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- 下载 -->
+      <section class="page hidden" id="page-download">
+        <div class="page-head">
+          <div>
+            <h2>游戏版本</h2>
+            <p class="muted" id="dlSub">从 Mojang 官方源获取版本清单</p>
+          </div>
+          <div class="page-head-actions">
+            <input class="search" id="dlSearch" type="search" placeholder="搜索版本号…" spellcheck="false" />
+            <button class="btn-ghost sm" id="btnRefreshList">刷新</button>
+          </div>
+        </div>
+        <div class="chips" id="dlChips">
+          <button class="chip active" data-filter="release">正式版</button>
+          <button class="chip" data-filter="snapshot">快照</button>
+          <button class="chip" data-filter="old">远古</button>
+          <button class="chip" data-filter="all">全部</button>
+        </div>
+        <div class="list" id="dlList">
+          <div class="empty">正在获取版本清单…</div>
+        </div>
+      </section>
+
+      <!-- 版本 -->
+      <section class="page hidden" id="page-mods">
+        <div class="page-head">
+          <div>
+            <h2>模组</h2>
+            <p class="muted" id="modsSub">正在读取当前版本…</p>
+          </div>
+          <div class="page-head-actions">
+            <input class="search" id="modsSearch" type="search" placeholder="搜索模组：sodium / jei / 小地图…" spellcheck="false" />
+            <button class="btn-ghost sm" id="btnModsImport">导入本地 jar</button>
+            <button class="btn-ghost sm" id="btnModsFolder">打开目录</button>
+          </div>
+        </div>
+        <div class="chips" id="modsChips">
+          <button class="chip active" data-tab="local">已安装</button>
+          <button class="chip" data-tab="browse">在线搜索</button>
+        </div>
+        <div class="list" id="modsList"><div class="empty">正在读取…</div></div>
+      </section>
+
+      <section class="page hidden" id="page-versions">
+        <div class="page-head">
+          <div>
+            <h2>已安装版本</h2>
+            <p class="muted" id="verSub">本地 versions 目录</p>
+          </div>
+          <div class="page-head-actions">
+            <button class="btn-ghost sm" id="btnOpenVersions">打开 versions</button>
+            <button class="btn-ghost sm" id="btnGoDownload">下载新版本</button>
+          </div>
+        </div>
+        <div class="list" id="verList"></div>
+      </section>
+
+      <!-- 设置 -->
+      <section class="page hidden" id="page-settings">
+        <div class="page-head"><div><h2>设置</h2><p class="muted">修改后立即生效</p></div></div>
+        <div class="settings-grid">
+          <div class="card setting">
+            <div class="setting-row">
+              <div class="setting-label"><b>游戏目录</b><small>versions / mods / saves 所在位置</small></div>
+              <div class="setting-ctl wide">
+                <input id="setGameDir" type="text" spellcheck="false" />
+                <button class="btn-ghost sm" data-pick="game">浏览</button>
+              </div>
+            </div>
+            <div class="setting-row">
+              <div class="setting-label"><b>玩家名</b><small>离线模式下的显示名称</small></div>
+              <div class="setting-ctl"><input id="setUsername" type="text" maxlength="16" spellcheck="false" /></div>
+            </div>
+            <div class="setting-row">
+              <div class="setting-label"><b>内存分配</b><small>越大越流畅，但别超过物理内存的一半</small></div>
+              <div class="setting-ctl">
+                <input id="setMem" type="range" min="1024" max="16384" step="512" />
+                <output id="setMemOut">4096 MB</output>
+              </div>
+            </div>
+            <div class="setting-row">
+              <div class="setting-label"><b>Java 路径</b><small>留空则自动探测；缺失时自动下载 Temurin JRE</small></div>
+              <div class="setting-ctl wide">
+                <input id="setJava" type="text" spellcheck="false" placeholder="自动" />
+                <button class="btn-ghost sm" data-pick="java">选择</button>
+                <button class="btn-ghost sm" id="btnAutoJava">自动</button>
+              </div>
+            </div>
+            <div class="setting-row">
+              <div class="setting-label"><b>窗口尺寸</b><small>启动时的游戏分辨率</small></div>
+              <div class="setting-ctl">
+                <input id="setW" type="number" min="640" max="7680" step="1" />
+                <span class="times">×</span>
+                <input id="setH" type="number" min="480" max="4320" step="1" />
+                <label class="check"><input id="setFull" type="checkbox" /><span>全屏</span></label>
+              </div>
+            </div>
+            <div class="setting-row">
+              <div class="setting-label"><b>额外 JVM 参数</b><small>例如 -XX:+UseZGC</small></div>
+              <div class="setting-ctl wide"><input id="setJvm" type="text" spellcheck="false" placeholder="留空即可" /></div>
+            </div>
+          </div>
+
+          <div class="card setting">
+            <div class="mini-title">已检测到的 Java</div>
+            <div class="java-list" id="javaList"></div>
+            <button class="btn-ghost sm full" id="btnRedetect">重新检测</button>
+          </div>
+        </div>
+      </section>
+
+      <!-- 关于 -->
+      <section class="page hidden" id="page-about">
+        <div class="card about">
+          <div class="about-head">
+            <svg viewBox="0 0 32 32" width="56" height="56">
+              <path d="M16 2c.9 6.6 3 8.8 9.6 9.9-6.6 1-8.7 3.3-9.6 9.9-.9-6.6-3-8.9-9.6-9.9C13 10.8 15.1 8.6 16 2z" fill="url(#lg)"/>
+              <path d="M16 21.5c.5 4 1.7 5.3 5.6 6-3.9.6-5.1 2-5.6 6-.5-4-1.7-5.4-5.6-6 3.9-.7 5.1-2 5.6-6z" fill="url(#lg)" opacity=".55"/>
+            </svg>
+            <div>
+              <h2 class="about-title">启明 <span class="ver" id="appVer">1.0.0</span></h2>
+              <p class="muted">跨平台 Minecraft 启动器 · 自研实现</p>
+            </div>
+          </div>
+          <div class="about-body">
+            <p>启明是一个从零实现的 Minecraft 启动器：直接对接 Mojang 官方清单与资源服务器，自行完成版本解析、依赖库下载、natives 解包、资源索引与 JVM 启动。</p>
+            <ul class="about-list">
+              <li><b>版本</b>：正式版 / 快照 / 远古版本，任意一个都能装</li>
+              <li><b>加载器</b>：Fabric、Quilt 一键安装</li>
+              <li><b>Java</b>：自动探测本机 JRE，缺失时下载 Adoptium Temurin</li>
+              <li><b>平台</b>：macOS（Apple Silicon / Intel）、Windows、Linux</li>
+            </ul>
+            <p class="muted small">说明：启明与 Plain Craft Launcher 无任何代码或资源关系，是独立实现；界面参考了同类启动器的信息结构，仅此而已。</p>
+          </div>
+          <div class="about-meta" id="aboutMeta"></div>
+        </div>
+      </section>
+    </div>
+
+    <!-- 控制台 -->
+    <div class="console" id="console">
+      <div class="console-head" id="consoleHead">
+        <div class="console-left">
+          <span class="dot" id="consoleDot"></span>
+          <span>运行日志</span>
+        </div>
+        <div class="console-right">
+          <button class="btn-link" id="btnClearLog">清空</button>
+          <button class="btn-link" id="btnToggleLog">展开</button>
+        </div>
+      </div>
+      <div class="console-body" id="consoleBody"></div>
+    </div>
+  </div>
+</div>
+
+<!-- 任务浮层 -->
+<div class="taskbar" id="taskbar" hidden>
+  <div class="taskbar-inner">
+    <div class="taskbar-top">
+      <span class="taskbar-label" id="taskLabel">准备中…</span>
+      <span class="taskbar-pct" id="taskPct">0%</span>
+    </div>
+    <div class="bar"><i id="taskBar"></i></div>
+    <div class="taskbar-meta" id="taskMeta"></div>
+  </div>
+</div>
+
+<!-- 安装弹窗 -->
+<div class="modal-mask" id="modalMask" hidden>
+  <div class="modal">
+    <div class="modal-head">
+      <h3 id="modalTitle">安装游戏版本</h3>
+      <button class="btn-link" id="modalClose">关闭</button>
+    </div>
+    <div class="modal-body">
+      <div class="modal-ver" id="modalVer">—</div>
+      <div class="loader-pick" id="loaderPick">
+        <button class="loader active" data-loader="vanilla">
+          <b>原版</b><small>Mojang 官方，纯净无加载器</small>
+        </button>
+        <button class="loader" data-loader="fabric">
+          <b>Fabric</b><small>轻量模组加载器，兼容性最好</small>
+        </button>
+        <button class="loader" data-loader="quilt">
+          <b>Quilt</b><small>Fabric 的衍生分支</small>
+        </button>
+      </div>
+    </div>
+    <div class="modal-foot">
+      <button class="btn-ghost" id="modalCancel">取消</button>
+      <button class="btn-primary" id="modalInstall">开始安装</button>
+    </div>
+  </div>
+</div>
+
+<div class="toasts" id="toasts"></div>
+
+<script src="app.js"></script>
+</body>
+</html>
